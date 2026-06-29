@@ -51,7 +51,7 @@ export default function CTASection({
             <Link href={primaryCTA.href}>
               <Button
                 size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
+                className="bg-sky-400 hover:bg-sky-500 text-blue-950 font-bold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
               >
                 {primaryCTA.text}
               </Button>

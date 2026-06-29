@@ -53,11 +53,11 @@ export default function Header() {
       <div className="bg-blue-900 text-white py-2 hidden md:block">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
-            <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+            <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-sky-300 transition-colors">
               <Phone className="h-4 w-4" />
               <span>+91 98765 43210</span>
             </a>
-            <a href="mailto:info@testacademy.com" className="flex items-center gap-2 hover:text-orange-400 transition-colors">
+            <a href="mailto:info@testacademy.com" className="flex items-center gap-2 hover:text-sky-300 transition-colors">
               <Mail className="h-4 w-4" />
               <span>info@testacademy.com</span>
             </a>
@@ -74,18 +74,18 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-sky-500 rounded-lg flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-xl">TA</span>
             </div>
             <div>
               <span className="text-2xl font-bold text-blue-900">Test</span>
-              <span className="text-2xl font-bold text-orange-500"> Academy</span>
-              <p className="text-xs text-gray-500 font-medium">Building Careers</p>
+              <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-sky-500"> Academy</span>
+              <p className="text-xs text-gray-500 font-medium tracking-wide">Building Careers</p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden xl:flex items-center gap-1">
             {navigation.map((item) =>
               item.hasDropdown ? (
                 <DropdownMenu key={item.name}>
@@ -116,9 +116,9 @@ export default function Header() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden xl:flex items-center gap-3">
             <Link href="/apply">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white shadow-md hover:shadow-lg transition-all">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all">
                 Apply Now
               </Button>
             </Link>
@@ -132,7 +132,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-blue-600"
+            className="xl:hidden p-2 text-gray-700 hover:text-blue-600"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -140,7 +140,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden pb-4 animate-fade-in">
+          <div className="xl:hidden pb-4 animate-fade-in">
             <div className="flex flex-col gap-2">
               {navigation.map((item) => (
                 <div key={item.name}>
@@ -169,7 +169,7 @@ export default function Header() {
               ))}
               <div className="flex flex-col gap-2 mt-4 px-4">
                 <Link href="/apply" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                     Apply Now
                   </Button>
                 </Link>

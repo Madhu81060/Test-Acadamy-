@@ -35,6 +35,7 @@ const features = [
     description: "Site visits and industrial training to understand real work environments.",
     color: "text-green-600",
     bg: "bg-green-50",
+    highlight: true,
   },
   {
     icon: Users,
@@ -42,6 +43,7 @@ const features = [
     description: "Direct placement drives with manufacturing and industrial companies.",
     color: "text-purple-600",
     bg: "bg-purple-50",
+    highlight: true,
   },
   {
     icon: Award,
@@ -49,6 +51,7 @@ const features = [
     description: "Government and industry recognized certifications for all courses.",
     color: "text-teal-600",
     bg: "bg-teal-50",
+    highlight: true,
   },
   {
     icon: FileBadge,
@@ -56,6 +59,7 @@ const features = [
     description: "Professional resume creation and interview preparation.",
     color: "text-red-600",
     bg: "bg-red-50",
+    highlight: true,
   },
   {
     icon: BookOpen,
@@ -63,6 +67,7 @@ const features = [
     description: "Regular practice sessions with industry professionals.",
     color: "text-indigo-600",
     bg: "bg-indigo-50",
+    highlight: true,
   },
   {
     icon: Clock,
@@ -70,6 +75,7 @@ const features = [
     description: "Dedicated placement cell with job assistance for all students.",
     color: "text-amber-600",
     bg: "bg-amber-50",
+    highlight: true,
   },
 ];
 

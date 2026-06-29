@@ -93,21 +93,24 @@ const slides = [
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [fadeState, setFadeState] = useState<"in" | "out">("in");
+
+  const changeSlide = useCallback((newIdx: number) => {
+    if (fadeState === "out") return;
+    setFadeState("out");
+    setTimeout(() => {
+      setCurrentSlide(newIdx);
+      setFadeState("in");
+    }, 300);
+  }, [fadeState]);
 
   const handleNext = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    setTimeout(() => setIsTransitioning(false), 500);
-  }, [isTransitioning]);
+    changeSlide((currentSlide + 1) % slides.length);
+  }, [currentSlide, changeSlide]);
 
   const handlePrev = useCallback(() => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setTimeout(() => setIsTransitioning(false), 500);
-  }, [isTransitioning]);
+    changeSlide((currentSlide - 1 + slides.length) % slides.length);
+  }, [currentSlide, changeSlide]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -119,19 +122,30 @@ export default function HeroSection() {
   const current = slides[currentSlide];
 
   return (
-    <section className="relative min-h-[95vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+    <section className="relative min-h-[95vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-950 via-slate-950 to-indigo-950">
       {/* Background Slides */}
       <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-20 scale-105"
-          style={{ backgroundImage: `url(${current.image})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-blue-950/90 to-slate-950/95" />
+        {slides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out ${
+              currentSlide === idx ? "opacity-30 scale-100" : "opacity-0 scale-105 pointer-events-none"
+            }`}
+            style={{ 
+              backgroundImage: `url(${slide.image})`,
+              transitionProperty: "opacity, transform"
+            }}
+          />
+        ))}
+        {/* Deep blue gradient overlays for a super-premium professional feel */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-950/95 to-sky-950/90 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-blue-950/40 to-sky-900/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
       </div>
 
       {/* Floating design elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
       </div>
 
@@ -139,11 +153,13 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Text & CTAs */}
-          <div className="lg:col-span-7 text-white space-y-6 md:space-y-8 transition-opacity duration-500 ease-in-out font-sans">
+          <div className={`lg:col-span-7 text-white space-y-6 md:space-y-8 font-sans transition-all duration-300 ${
+            fadeState === "in" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>
             
             {/* Animated Badge */}
             <div className={`inline-flex items-center gap-2 border rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider backdrop-blur-sm transition-all duration-300 ${current.badgeColor}`}>
-              <span className="w-2 h-2 bg-orange-500 rounded-full animate-ping" />
+              <span className="w-2 h-2 bg-sky-400 rounded-full animate-ping" />
               <span>{current.badge}</span>
             </div>
 
@@ -154,7 +170,7 @@ export default function HeroSection() {
                 const cleanWord = word.replace(/[.,]/g, "");
                 const isHighlight = highlightWords.some(hw => cleanWord.toLowerCase().includes(hw.toLowerCase()));
                 return (
-                  <span key={i} className={isHighlight ? "text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-500 pr-1 md:pr-2 inline-block" : "pr-1 md:pr-2 inline-block"}>
+                  <span key={i} className={isHighlight ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-400 to-cyan-300 pr-1 md:pr-2 inline-block" : "pr-1 md:pr-2 inline-block"}>
                     {word}
                   </span>
                 );
@@ -170,7 +186,7 @@ export default function HeroSection() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {current.bullets.map((bullet, idx) => (
                 <div key={idx} className="flex items-center gap-2 group hover:translate-x-1 transition-transform">
-                  <CheckCircle2 className="h-5 w-5 text-orange-400 flex-shrink-0" />
+                  <CheckCircle2 className="h-5 w-5 text-sky-400 flex-shrink-0" />
                   <span className="text-slate-200 text-sm md:text-base">{bullet}</span>
                 </div>
               ))}
@@ -179,10 +195,10 @@ export default function HeroSection() {
             {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <Link href={current.primaryCTA.href} className="w-full sm:w-auto relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-300" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-sky-500 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-300" />
                 <Button
                   size="lg"
-                  className="relative w-full sm:w-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-6 px-8 text-base rounded-xl shadow-lg border border-white/10"
+                  className="relative w-full sm:w-auto bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold py-6 px-8 text-base rounded-xl shadow-lg border border-white/10"
                 >
                   <Calendar className="mr-2 h-5 w-5" />
                   {current.primaryCTA.text}
@@ -192,7 +208,7 @@ export default function HeroSection() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto bg-white/5 border-white/20 text-white hover:bg-white/10 font-bold py-6 px-8 text-base rounded-xl"
+                  className="w-full sm:w-auto bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-sky-400 font-bold py-6 px-8 text-base rounded-xl transition-colors"
                 >
                   {current.secondaryCTA.text}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -202,43 +218,45 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: Unique Pictorial/Flow Diagram per Slide */}
-          <div className="lg:col-span-5 w-full flex justify-center">
+          <div className={`lg:col-span-5 w-full flex justify-center transition-all duration-300 ${
+            fadeState === "in" ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-4 scale-95"
+          }`}>
             
             {/* Visual Slide 1: Lab Workstation Diagram */}
             {currentSlide === 0 && (
               <div className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 w-full max-w-md shadow-2xl relative overflow-hidden group animate-scale-in">
-                <div className="absolute -top-12 -right-12 w-28 h-28 bg-orange-500/10 rounded-full blur-xl animate-pulse" />
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-sky-500/10 rounded-full blur-xl animate-pulse" />
                 
                 <h3 className="text-white font-bold text-lg mb-4 border-b border-white/10 pb-3 flex items-center justify-between">
                   <span>Smart Lab Workstation</span>
-                  <span className="text-[10px] text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Smart Lab</span>
+                  <span className="text-[10px] text-sky-400 bg-sky-500/10 border border-sky-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Smart Lab</span>
                 </h3>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
-                    <Wrench className="w-6 h-6 text-orange-400 mb-2" />
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-sky-500/30 transition-colors">
+                    <Wrench className="w-6 h-6 text-sky-400 mb-2" />
                     <h4 className="text-white text-sm font-bold">Motor Controls</h4>
                     <p className="text-slate-400 text-xs mt-1">DOL & Star-Delta starter testing panels.</p>
                   </div>
-                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-sky-500/30 transition-colors">
                     <ShieldCheck className="w-6 h-6 text-green-400 mb-2" />
                     <h4 className="text-white text-sm font-bold">Safety Desk</h4>
                     <p className="text-slate-400 text-xs mt-1">LOTO safety protocols and earthing kits.</p>
                   </div>
-                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-sky-500/30 transition-colors">
                     <Sliders className="w-6 h-6 text-blue-400 mb-2" />
                     <h4 className="text-white text-sm font-bold">Test Bench</h4>
                     <p className="text-slate-400 text-xs mt-1">Multimeters, clamp meters & megger units.</p>
                   </div>
-                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-sky-500/30 transition-colors">
                     <Monitor className="w-6 h-6 text-purple-400 mb-2" />
                     <h4 className="text-white text-sm font-bold">Automation</h4>
                     <p className="text-slate-400 text-xs mt-1">PLC programming and VFD control desks.</p>
                   </div>
                 </div>
 
-                <div className="mt-5 p-3.5 bg-orange-500/10 border border-orange-500/20 rounded-xl text-center">
-                  <p className="text-xs text-orange-300 font-bold">★ 100% Practical Labs - Perform Wiring On Live Kits</p>
+                <div className="mt-5 p-3.5 bg-sky-500/10 border border-sky-500/20 rounded-xl text-center">
+                  <p className="text-xs text-sky-300 font-bold">★ 100% Practical Labs - Perform Wiring On Live Kits</p>
                 </div>
               </div>
             )}
@@ -246,11 +264,11 @@ export default function HeroSection() {
             {/* Visual Slide 2: Horizontal connected Chevron Flow */}
             {currentSlide === 1 && (
               <div className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 w-full max-w-md shadow-2xl relative overflow-hidden group animate-scale-in">
-                <div className="absolute -top-12 -right-12 w-28 h-28 bg-green-500/10 rounded-full blur-xl" />
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-teal-500/10 rounded-full blur-xl" />
                 
                 <h3 className="text-white font-bold text-lg mb-6 border-b border-white/10 pb-3 flex items-center justify-between">
                   <span>Student Placement Path</span>
-                  <span className="text-[10px] text-green-400 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Flow Diagram</span>
+                  <span className="text-[10px] text-teal-400 bg-teal-500/10 border border-teal-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Flow Diagram</span>
                 </h3>
 
                 <div className="space-y-4">
@@ -260,8 +278,8 @@ export default function HeroSection() {
                     { num: "03", title: "Mock Interview & Resume", desc: "Build resumes & undergo intensive verbal mock drills with experts." },
                     { num: "04", title: "Drive & Job Offer", desc: "Attend placement drives and secure certified, verified career job offers." }
                   ].map((step, idx) => (
-                    <div key={idx} className="flex gap-4 items-center bg-white/5 border border-white/5 rounded-2xl p-3 hover:bg-white/10 transition-colors">
-                      <div className="w-10 h-10 rounded-full bg-green-500/20 text-green-400 font-extrabold flex items-center justify-center flex-shrink-0 text-sm border border-green-500/30">
+                    <div key={idx} className="flex gap-4 items-center bg-white/5 border border-white/5 rounded-2xl p-3 hover:bg-white/10 hover:border-teal-500/20 transition-colors">
+                      <div className="w-10 h-10 rounded-full bg-teal-500/20 text-teal-400 font-extrabold flex items-center justify-center flex-shrink-0 text-sm border border-teal-500/30">
                         {step.num}
                       </div>
                       <div className="min-w-0">
@@ -297,7 +315,7 @@ export default function HeroSection() {
                         <p className="text-slate-400 text-xs mt-0.5">Role: {specialty.role}</p>
                       </div>
                       <div className="text-right">
-                        <span className="text-xs font-bold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2.5 py-1 rounded-full">
+                        <span className="text-xs font-bold text-sky-400 bg-sky-500/10 border border-sky-500/20 px-2.5 py-1 rounded-full">
                           {specialty.salary}
                         </span>
                       </div>
@@ -365,13 +383,11 @@ export default function HeroSection() {
               <button
                 key={idx}
                 onClick={() => {
-                  if (isTransitioning) return;
-                  setIsTransitioning(true);
-                  setCurrentSlide(idx);
-                  setTimeout(() => setIsTransitioning(false), 500);
+                  if (currentSlide === idx) return;
+                  changeSlide(idx);
                 }}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  currentSlide === idx ? "w-8 bg-orange-500" : "w-2.5 bg-slate-600 hover:bg-slate-500"
+                  currentSlide === idx ? "w-8 bg-sky-400" : "w-2.5 bg-slate-600 hover:bg-slate-500"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -382,14 +398,14 @@ export default function HeroSection() {
           <div className="flex gap-3">
             <button
               onClick={handlePrev}
-              className="p-3.5 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/60 hover:bg-slate-900 text-white transition-colors"
+              className="p-3.5 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/60 hover:bg-slate-900 text-white hover:text-sky-400 transition-colors"
               aria-label="Previous slide"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               onClick={handleNext}
-              className="p-3.5 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/60 hover:bg-slate-900 text-white transition-colors"
+              className="p-3.5 rounded-xl border border-white/10 hover:border-white/20 bg-slate-900/60 hover:bg-slate-900 text-white hover:text-sky-400 transition-colors"
               aria-label="Next slide"
             >
               <ChevronRight className="h-5 w-5" />
