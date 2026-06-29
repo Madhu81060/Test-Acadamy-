@@ -17,6 +17,11 @@ import {
   Sliders,
   ArrowRight,
   TrendingUp,
+  Monitor,
+  ShieldCheck,
+  FileText,
+  Building2,
+  Sparkles,
 } from "lucide-react";
 
 const slides = [
@@ -33,15 +38,8 @@ const slides = [
       "Expert Vocational Trainers",
       "Industry Grade Instruments",
     ],
-    primaryCTA: { text: "Book FREE Demo", href: "/contact?demo=true" },
+    primaryCTA: { text: "Book FREE Demo Now", href: "/contact?demo=true" },
     secondaryCTA: { text: "Our Courses", href: "/courses" },
-    // Pictorial workflow representation for Slide 1
-    flowSteps: [
-      { step: "1", title: "Theory Basics", desc: "Interactive concepts", icon: Zap },
-      { step: "2", title: "Smart Labs", desc: "100% Practical work", icon: Wrench },
-      { step: "3", title: "Site Visits", desc: "Real plants & grids", icon: Briefcase },
-      { step: "4", title: "Placement", desc: "Job confirmation", icon: Award },
-    ]
   },
   {
     id: "placement-process",
@@ -58,13 +56,6 @@ const slides = [
     ],
     primaryCTA: { text: "Apply For Admission", href: "/apply" },
     secondaryCTA: { text: "Success Stories", href: "/success-stories" },
-    // Chevron/Flow diagram representation for Slide 2
-    flowSteps: [
-      { step: "01", title: "Enroll & Learn", desc: "Select program", icon: Play },
-      { step: "02", title: "Lab Exercises", desc: "Build & configure", icon: Sliders },
-      { step: "03", title: "Prep & Mock", desc: "Interview ready", icon: Users },
-      { step: "04", title: "Land Job", desc: "Get placed fast", icon: Award },
-    ]
   },
   {
     id: "iti-vocational",
@@ -81,13 +72,6 @@ const slides = [
     ],
     primaryCTA: { text: "Explore ITI Courses", href: "/courses#iti-electrician-wireman" },
     secondaryCTA: { text: "Get Counseling", href: "/contact" },
-    // Diagram representing courses categories
-    flowSteps: [
-      { step: "EEE", title: "Electrical", desc: "Wiring & Power", icon: Zap },
-      { step: "ECE", title: "Electronics", desc: "Circuits & PCBs", icon: Sliders },
-      { step: "ITI", title: "Electrician", desc: "Motors & Panels", icon: Wrench },
-      { step: "PLC", title: "Technician", desc: "Automation & VFDs", icon: TrendingUp },
-    ]
   },
   {
     id: "internships",
@@ -104,13 +88,6 @@ const slides = [
     ],
     primaryCTA: { text: "Register for Internship", href: "/apply?type=internship" },
     secondaryCTA: { text: "View Placements", href: "/placements" },
-    // Flow process diagram
-    flowSteps: [
-      { step: "A", title: "Join Demo", desc: "2-days free trial", icon: Calendar },
-      { step: "B", title: "Get Trained", desc: "Hands-on projects", icon: Sliders },
-      { step: "C", title: "Internship", desc: "Work on live sites", icon: Briefcase },
-      { step: "D", title: "Graduate", desc: "Start Earning", icon: Award },
-    ]
   }
 ];
 
@@ -135,18 +112,18 @@ export default function HeroSection() {
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
-    }, 6000);
+    }, 8000);
     return () => clearInterval(timer);
   }, [handleNext]);
 
   const current = slides[currentSlide];
 
   return (
-    <section className="relative min-h-[95vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-955">
+    <section className="relative min-h-[95vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
       {/* Background Slides */}
       <div className="absolute inset-0 z-0">
         <div
-          className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-25 scale-105"
+          className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out opacity-20 scale-105"
           style={{ backgroundImage: `url(${current.image})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-blue-950/90 to-slate-950/95" />
@@ -161,7 +138,7 @@ export default function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 z-20 w-full">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left: Content Card */}
+          {/* Left Column: Text & CTAs */}
           <div className="lg:col-span-7 text-white space-y-6 md:space-y-8 transition-opacity duration-500 ease-in-out font-sans">
             
             {/* Animated Badge */}
@@ -185,7 +162,7 @@ export default function HeroSection() {
             </h1>
 
             {/* Slide Description */}
-            <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl">
+            <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl font-normal">
               {current.description}
             </p>
 
@@ -224,65 +201,175 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right: Pictorial/Flow Diagram representation */}
+          {/* Right Column: Unique Pictorial/Flow Diagram per Slide */}
           <div className="lg:col-span-5 w-full flex justify-center">
-            <div className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 w-full max-w-md shadow-2xl relative overflow-hidden group">
-              <div className="absolute -top-12 -right-12 w-28 h-28 bg-orange-500/10 rounded-full blur-xl" />
-              <div className="absolute -bottom-12 -left-12 w-28 h-28 bg-blue-500/10 rounded-full blur-xl" />
-              
-              <h3 className="text-white font-bold text-lg mb-6 border-b border-white/10 pb-3 flex items-center justify-between">
-                <span>Training workflow / process</span>
-                <span className="text-xs text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2.5 py-0.5 rounded-full font-medium">Step-by-Step Flow</span>
-              </h3>
+            
+            {/* Visual Slide 1: Lab Workstation Diagram */}
+            {currentSlide === 0 && (
+              <div className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 w-full max-w-md shadow-2xl relative overflow-hidden group animate-scale-in">
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-orange-500/10 rounded-full blur-xl animate-pulse" />
+                
+                <h3 className="text-white font-bold text-lg mb-4 border-b border-white/10 pb-3 flex items-center justify-between">
+                  <span>Smart Lab Workstation</span>
+                  <span className="text-[10px] text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Smart Lab</span>
+                </h3>
 
-              {/* Vertical Process Steps Flow */}
-              <div className="space-y-6 relative">
-                {/* Visual Line connector */}
-                <div className="absolute left-[21px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-orange-500 via-blue-500 to-green-500 opacity-30" />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                    <Wrench className="w-6 h-6 text-orange-400 mb-2" />
+                    <h4 className="text-white text-sm font-bold">Motor Controls</h4>
+                    <p className="text-slate-400 text-xs mt-1">DOL & Star-Delta starter testing panels.</p>
+                  </div>
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                    <ShieldCheck className="w-6 h-6 text-green-400 mb-2" />
+                    <h4 className="text-white text-sm font-bold">Safety Desk</h4>
+                    <p className="text-slate-400 text-xs mt-1">LOTO safety protocols and earthing kits.</p>
+                  </div>
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                    <Sliders className="w-6 h-6 text-blue-400 mb-2" />
+                    <h4 className="text-white text-sm font-bold">Test Bench</h4>
+                    <p className="text-slate-400 text-xs mt-1">Multimeters, clamp meters & megger units.</p>
+                  </div>
+                  <div className="bg-white/5 p-4 rounded-xl border border-white/5 hover:border-orange-500/30 transition-colors">
+                    <Monitor className="w-6 h-6 text-purple-400 mb-2" />
+                    <h4 className="text-white text-sm font-bold">Automation</h4>
+                    <p className="text-slate-400 text-xs mt-1">PLC programming and VFD control desks.</p>
+                  </div>
+                </div>
 
-                {current.flowSteps.map((stepItem, idx) => {
-                  const StepIcon = stepItem.icon;
-                  return (
-                    <div key={idx} className="flex gap-4 items-start relative group/item hover:translate-x-1.5 transition-transform duration-300">
-                      
-                      {/* Step Bubble icon */}
-                      <div className="w-11 h-11 rounded-full bg-slate-950 border border-white/10 text-orange-400 font-bold text-sm flex items-center justify-center relative z-10 group-hover/item:border-orange-500/40 group-hover/item:text-white transition-all shadow-lg flex-shrink-0">
-                        <StepIcon className="w-5 h-5 text-orange-400 group-hover/item:scale-110 transition-transform" />
-                      </div>
-
-                      {/* Step content */}
-                      <div className="flex-1 min-w-0 bg-white/5 border border-white/5 group-hover/item:border-white/10 p-3.5 rounded-2xl transition-colors">
-                        <div className="flex items-center justify-between gap-2">
-                          <h4 className="text-slate-100 font-bold text-sm group-hover/item:text-orange-400 transition-colors truncate">
-                            {stepItem.title}
-                          </h4>
-                          <span className="text-[10px] text-slate-500 font-extrabold uppercase bg-white/5 px-2 py-0.5 rounded border border-white/5">
-                            Step {stepItem.step}
-                          </span>
-                        </div>
-                        <p className="text-slate-400 text-xs mt-1 leading-relaxed">
-                          {stepItem.desc}
-                        </p>
-                      </div>
-
-                    </div>
-                  );
-                })}
+                <div className="mt-5 p-3.5 bg-orange-500/10 border border-orange-500/20 rounded-xl text-center">
+                  <p className="text-xs text-orange-300 font-bold">★ 100% Practical Labs - Perform Wiring On Live Kits</p>
+                </div>
               </div>
+            )}
 
-            </div>
+            {/* Visual Slide 2: Horizontal connected Chevron Flow */}
+            {currentSlide === 1 && (
+              <div className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 w-full max-w-md shadow-2xl relative overflow-hidden group animate-scale-in">
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-green-500/10 rounded-full blur-xl" />
+                
+                <h3 className="text-white font-bold text-lg mb-6 border-b border-white/10 pb-3 flex items-center justify-between">
+                  <span>Student Placement Path</span>
+                  <span className="text-[10px] text-green-400 bg-green-500/10 border border-green-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Flow Diagram</span>
+                </h3>
+
+                <div className="space-y-4">
+                  {[
+                    { num: "01", title: "Enroll & Lab Practice", desc: "Choose EEE / ECE or ITI modules & practice daily in smart labs." },
+                    { num: "02", title: "Site & Industrial Visits", desc: "Gain physical site work exposure in plants and switchgear stations." },
+                    { num: "03", title: "Mock Interview & Resume", desc: "Build resumes & undergo intensive verbal mock drills with experts." },
+                    { num: "04", title: "Drive & Job Offer", desc: "Attend placement drives and secure certified, verified career job offers." }
+                  ].map((step, idx) => (
+                    <div key={idx} className="flex gap-4 items-center bg-white/5 border border-white/5 rounded-2xl p-3 hover:bg-white/10 transition-colors">
+                      <div className="w-10 h-10 rounded-full bg-green-500/20 text-green-400 font-extrabold flex items-center justify-center flex-shrink-0 text-sm border border-green-500/30">
+                        {step.num}
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="text-white text-sm font-bold">{step.title}</h4>
+                        <p className="text-slate-400 text-xs truncate mt-0.5">{step.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Visual Slide 3: ITI Course Specialization & Salary Grid */}
+            {currentSlide === 2 && (
+              <div className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 w-full max-w-md shadow-2xl relative overflow-hidden group animate-scale-in">
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-blue-500/10 rounded-full blur-xl" />
+                
+                <h3 className="text-white font-bold text-lg mb-5 border-b border-white/10 pb-3 flex items-center justify-between">
+                  <span>Course Paths & Packages</span>
+                  <span className="text-[10px] text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Specializations</span>
+                </h3>
+
+                <div className="space-y-3.5">
+                  {[
+                    { title: "Electrical Engineering (EEE)", role: "Maintenance Technician", salary: "Rs. 2.5 - 6.0 LPA" },
+                    { title: "Electronics Engineering (ECE)", role: "PCB / Service Engineer", salary: "Rs. 2.5 - 5.5 LPA" },
+                    { title: "ITI Electrician & Wireman", role: "Substation Panel Operator", salary: "Rs. 2.2 - 5.0 LPA" },
+                    { title: "Electrical Tech (Advanced PLC)", role: "Automation Assistant", salary: "Rs. 3.0 - 7.0 LPA" }
+                  ].map((specialty, idx) => (
+                    <div key={idx} className="flex justify-between items-center bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl p-3.5 transition-colors">
+                      <div>
+                        <h4 className="text-white text-sm font-bold">{specialty.title}</h4>
+                        <p className="text-slate-400 text-xs mt-0.5">Role: {specialty.role}</p>
+                      </div>
+                      <div className="text-right">
+                        <span className="text-xs font-bold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-2.5 py-1 rounded-full">
+                          {specialty.salary}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Visual Slide 4: Internship Mock Certificate */}
+            {currentSlide === 3 && (
+              <div className="bg-slate-900/80 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 w-full max-w-md shadow-2xl relative overflow-hidden group animate-scale-in">
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-purple-500/10 rounded-full blur-xl" />
+                
+                <h3 className="text-white font-bold text-lg mb-4 border-b border-white/10 pb-3 flex items-center justify-between">
+                  <span>Credential Visualizer</span>
+                  <span className="text-[10px] text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded font-extrabold uppercase">Certificate</span>
+                </h3>
+
+                {/* Simulated Certificate Graphic */}
+                <div className="border-2 border-double border-yellow-500/40 p-4 rounded-xl bg-slate-950 text-center relative overflow-hidden">
+                  <div className="absolute -right-8 -bottom-8 w-16 h-16 bg-yellow-500/10 rounded-full border border-yellow-500/20 flex items-center justify-center rotate-12">
+                    <Award className="w-8 h-8 text-yellow-500" />
+                  </div>
+                  
+                  <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold block mb-1">Certificate of Completion</span>
+                  <h4 className="text-yellow-500 font-serif text-lg font-bold">Test Academy Training</h4>
+                  <p className="text-slate-300 text-[10px] mt-2 font-light italic leading-normal">
+                    This certifies that the candidate has successfully completed 100% practical lab training in Advanced Electrical Systems & Panel Wiring.
+                  </p>
+                  
+                  <div className="flex justify-between items-center mt-4 pt-3 border-t border-white/5 text-[9px]">
+                    <div className="text-left">
+                      <p className="text-slate-400">Authorized Signatory</p>
+                      <p className="text-white font-bold font-serif mt-0.5">Test Academy Board</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-slate-400">Govt Reg No</p>
+                      <p className="text-green-400 font-bold mt-0.5">TA-2026-ELECT-99</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Placement Logos list */}
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  <p className="text-[11px] text-slate-400 font-bold text-center uppercase tracking-wider mb-2">Our Top Placement Partners</p>
+                  <div className="flex justify-center gap-3 text-[10px] font-bold text-slate-300">
+                    <span className="bg-white/5 border border-white/5 px-2.5 py-1 rounded">L&T Partner</span>
+                    <span className="bg-white/5 border border-white/5 px-2.5 py-1 rounded">Siemens System</span>
+                    <span className="bg-white/5 border border-white/5 px-2.5 py-1 rounded">ABB Controls</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
           </div>
 
         </div>
 
-        {/* Carousel controls */}
+        {/* Carousel indicators & controls */}
         <div className="mt-16 flex items-center justify-between border-t border-white/10 pt-6">
           {/* Dots Indicator */}
           <div className="flex gap-2">
             {slides.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setCurrentSlide(idx)}
+                onClick={() => {
+                  if (isTransitioning) return;
+                  setIsTransitioning(true);
+                  setCurrentSlide(idx);
+                  setTimeout(() => setIsTransitioning(false), 500);
+                }}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
                   currentSlide === idx ? "w-8 bg-orange-500" : "w-2.5 bg-slate-600 hover:bg-slate-500"
                 }`}
