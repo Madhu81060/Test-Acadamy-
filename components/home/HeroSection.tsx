@@ -27,9 +27,9 @@ import {
 const slides = [
   {
     id: "practical-training",
-    image: "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: "https://images.pexels.com/photos/8364826/pexels-photo-8364826.jpeg?auto=compress&cs=tinysrgb&w=1920",
     badge: "Limited Seats Available",
-    badgeColor: "bg-orange-500/20 text-orange-300 border-orange-500/30",
+    badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
     title: "100% Practical ITI & Diploma Electrical Training",
     description: "No boring classroom theory. Learn by doing in our advanced labs with motor control, transformer installation, panel boards, and modern switchgears.",
     bullets: [
@@ -43,9 +43,9 @@ const slides = [
   },
   {
     id: "placement-process",
-    image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1920",
     badge: "98% Placement Rate",
-    badgeColor: "bg-green-500/20 text-green-300 border-green-500/30",
+    badgeColor: "bg-sky-500/20 text-sky-300 border-sky-500/30",
     title: "Our 4-Step Career Placement Process",
     description: "We don't just teach you; we guide you step-by-step from training directly into a guaranteed high-paying technical job.",
     bullets: [
@@ -59,9 +59,9 @@ const slides = [
   },
   {
     id: "iti-vocational",
-    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: "https://images.pexels.com/photos/1708912/pexels-photo-1708912.jpeg?auto=compress&cs=tinysrgb&w=1920",
     badge: "Vocational Excellence",
-    badgeColor: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+    badgeColor: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
     title: "Specialized Courses for ITI & Diploma Students",
     description: "Boost your certificate values. Transition from apprentice to advanced electrician with PLC, industrial control panels, and automation wiring.",
     bullets: [
@@ -75,9 +75,9 @@ const slides = [
   },
   {
     id: "internships",
-    image: "https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1920",
     badge: "Internships Included",
-    badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30",
+    badgeColor: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
     title: "Live Project Internships & Industry Certifications",
     description: "Gain industry work experience with integrated internships on active projects, and earn government-recognized certifications.",
     bullets: [
@@ -122,14 +122,14 @@ export default function HeroSection() {
   const current = slides[currentSlide];
 
   return (
-    <section className="relative min-h-[95vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-950 via-slate-950 to-indigo-950">
+    <section className="relative min-h-[95vh] md:min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-800">
       {/* Background Slides */}
       <div className="absolute inset-0 z-0">
         {slides.map((slide, idx) => (
           <div
             key={slide.id}
             className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out ${
-              currentSlide === idx ? "opacity-30 scale-100" : "opacity-0 scale-105 pointer-events-none"
+              currentSlide === idx ? "opacity-75 scale-100" : "opacity-0 scale-105 pointer-events-none"
             }`}
             style={{ 
               backgroundImage: `url(${slide.image})`,
@@ -137,10 +137,9 @@ export default function HeroSection() {
             }}
           />
         ))}
-        {/* Deep blue gradient overlays for a super-premium professional feel */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-950 via-blue-950/95 to-sky-950/90 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-blue-950/40 to-sky-900/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+        {/* Vibrant blue gradient overlays that make the background image clearly visible while keeping the left text readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-blue-950/45 via-transparent to-transparent" />
       </div>
 
       {/* Floating design elements */}

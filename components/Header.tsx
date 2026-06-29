@@ -22,14 +22,30 @@ const courses = [
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Courses", href: "/courses", hasDropdown: true },
+  {
+    name: "About Us",
+    hasDropdown: true,
+    dropdownItems: [
+      { name: "About Academy", href: "/about" },
+      { name: "Trainers", href: "/trainers" },
+      { name: "Certifications", href: "/certifications" },
+      { name: "Gallery", href: "/gallery" },
+    ],
+  },
+  {
+    name: "Courses",
+    hasDropdown: true,
+    dropdownItems: courses,
+  },
   { name: "Internships", href: "/internships" },
-  { name: "Trainers", href: "/trainers" },
-  { name: "Placements", href: "/placements" },
-  { name: "Success Stories", href: "/success-stories" },
-  { name: "Gallery", href: "/gallery" },
-  { name: "Certifications", href: "/certifications" },
+  {
+    name: "Placements",
+    hasDropdown: true,
+    dropdownItems: [
+      { name: "Placement Portal", href: "/placements" },
+      { name: "Success Stories", href: "/success-stories" },
+    ],
+  },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -85,19 +101,19 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden xl:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1">
             {navigation.map((item) =>
-              item.hasDropdown ? (
+              item.hasDropdown && item.dropdownItems ? (
                 <DropdownMenu key={item.name}>
-                  <DropdownMenuTrigger className="flex items-center gap-1 px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors">
+                  <DropdownMenuTrigger className="flex items-center gap-1 px-2.5 xl:px-3 py-2 text-gray-700 hover:text-blue-600 font-semibold text-sm xl:text-base transition-colors focus:outline-none">
                     {item.name}
-                    <ChevronDown className="h-4 w-4" />
+                    <ChevronDown className="h-3.5 w-3.5 opacity-80" />
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-56">
-                    {courses.map((course) => (
-                      <DropdownMenuItem key={course.name} asChild>
-                        <Link href={course.href} className="cursor-pointer">
-                          {course.name}
+                  <DropdownMenuContent align="start" className="w-64">
+                    {item.dropdownItems.map((subItem) => (
+                      <DropdownMenuItem key={subItem.name} asChild>
+                        <Link href={subItem.href} className="cursor-pointer font-medium text-sm">
+                          {subItem.name}
                         </Link>
                       </DropdownMenuItem>
                     ))}
@@ -106,8 +122,8 @@ export default function Header() {
               ) : (
                 <Link
                   key={item.name}
-                  href={item.href}
-                  className="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                  href={item.href || "#"}
+                  className="px-2.5 xl:px-3 py-2 text-gray-700 hover:text-blue-600 font-semibold text-sm xl:text-base transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -116,14 +132,14 @@ export default function Header() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden xl:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-2 xl:gap-3">
             <Link href="/apply">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all px-4 xl:px-5">
                 Apply Now
               </Button>
             </Link>
             <Link href="/contact?demo=true">
-              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold text-sm px-4 xl:px-5">
                 Book Free Demo
               </Button>
             </Link>
@@ -132,7 +148,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="xl:hidden p-2 text-gray-700 hover:text-blue-600"
+            className="lg:hidden p-2 text-gray-700 hover:text-blue-600"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -140,27 +156,33 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="xl:hidden pb-4 animate-fade-in">
+          <div className="lg:hidden pb-4 animate-fade-in">
             <div className="flex flex-col gap-2">
               {navigation.map((item) => (
-                <div key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium hover:bg-blue-50 rounded-lg transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                  {item.hasDropdown && (
-                    <div className="pl-6">
-                      {courses.map((course) => (
+                <div key={item.name} className="space-y-1">
+                  {item.hasDropdown ? (
+                    <div className="px-4 py-2 font-bold text-blue-900 border-b border-gray-100 text-sm uppercase tracking-wider">
+                      {item.name}
+                    </div>
+                  ) : (
+                    <Link
+                      href={item.href || "#"}
+                      className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold hover:bg-blue-50 rounded-lg transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  )}
+                  {item.hasDropdown && item.dropdownItems && (
+                    <div className="pl-4 space-y-1 bg-slate-50/50 py-1.5 rounded-lg">
+                      {item.dropdownItems.map((subItem) => (
                         <Link
-                          key={course.name}
-                          href={course.href}
-                          className="block px-4 py-1.5 text-sm text-gray-600 hover:text-blue-600"
+                          key={subItem.name}
+                          href={subItem.href}
+                          className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50/50 rounded-md transition-colors"
                           onClick={() => setIsOpen(false)}
                         >
-                          {course.name}
+                          {subItem.name}
                         </Link>
                       ))}
                     </div>
@@ -169,12 +191,12 @@ export default function Header() {
               ))}
               <div className="flex flex-col gap-2 mt-4 px-4">
                 <Link href="/apply" onClick={() => setIsOpen(false)}>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-lg shadow">
                     Apply Now
                   </Button>
                 </Link>
                 <Link href="/contact?demo=true" onClick={() => setIsOpen(false)}>
-                  <Button variant="outline" className="w-full border-blue-600 text-blue-600">
+                  <Button variant="outline" className="w-full border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-5 rounded-lg">
                     Book Free Demo
                   </Button>
                 </Link>
