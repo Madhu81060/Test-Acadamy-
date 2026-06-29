@@ -1,5 +1,3 @@
-import { supabase } from './supabase';
-
 export interface ContactFormData {
   name: string;
   email: string;
@@ -34,44 +32,39 @@ export interface ApplicationFormData {
 }
 
 export async function submitContactForm(data: ContactFormData) {
-  const { error } = await supabase.from('contact_submissions').insert({
-    name: data.name,
-    email: data.email,
-    phone: data.phone,
-    subject: data.subject,
-    course: data.course,
-    message: data.message,
-    demo_date: data.demoDate || null,
-    is_demo: data.isDemo || false,
-  });
+  console.log("Mock Submit Contact Form:", data);
+  
+  try {
+    if (typeof window !== "undefined") {
+      const submissions = JSON.parse(localStorage.getItem("contact_submissions") || "[]");
+      submissions.push({ ...data, created_at: new Date().toISOString() });
+      localStorage.setItem("contact_submissions", JSON.stringify(submissions));
+    }
+  } catch (e) {
+    console.error("Local storage not available", e);
+  }
 
-  if (error) throw error;
+  // Simulate network delay
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   return { success: true };
 }
 
 export async function submitApplication(data: ApplicationFormData) {
-  const { error } = await supabase.from('applications').insert({
-    first_name: data.firstName,
-    last_name: data.lastName,
-    email: data.email,
-    phone: data.phone,
-    dob: data.dob || null,
-    gender: data.gender || null,
-    address: data.address || null,
-    city: data.city || null,
-    state: data.state || null,
-    pincode: data.pincode || null,
-    highest_qualification: data.highestQualification || null,
-    college_name: data.collegeName || null,
-    passing_year: data.passingYear || null,
-    percentage: data.percentage || null,
-    has_experience: data.hasExperience || false,
-    experience_years: data.experienceYears || null,
-    current_company: data.currentCompany || null,
-    course: data.course,
-    batch: data.batch,
-  });
+  console.log("Mock Submit Application:", data);
 
-  if (error) throw error;
+  try {
+    if (typeof window !== "undefined") {
+      const applications = JSON.parse(localStorage.getItem("applications") || "[]");
+      applications.push({ ...data, created_at: new Date().toISOString() });
+      localStorage.setItem("applications", JSON.stringify(applications));
+    }
+  } catch (e) {
+    console.error("Local storage not available", e);
+  }
+
+  // Simulate network delay
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   return { success: true };
 }
