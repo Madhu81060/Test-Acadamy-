@@ -97,11 +97,7 @@ function AnimatedCard({ feature, index }: { feature: typeof features[0]; index: 
   return (
     <div
       ref={ref}
-      className={`group bg-white rounded-xl p-6 border transition-all duration-500 hover:shadow-lg hover:-translate-y-2 ${
-        feature.highlight
-          ? "border-2 shadow-md animate-orange-glow"
-          : "border-gray-100 hover:border-blue-200"
-      }`}
+      className="group bg-white rounded-xl p-6 border-2 shadow-md animate-orange-glow transition-all duration-500 hover:shadow-lg hover:-translate-y-2"
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "translateY(0)" : "translateY(30px)",
