@@ -61,6 +61,17 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       isScrolled ? "bg-white shadow-lg" : "bg-white/95 backdrop-blur-sm"
@@ -154,10 +165,10 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Drawer */}
         {isOpen && (
-          <div className="lg:hidden pb-4 animate-fade-in">
-            <div className="flex flex-col gap-2">
+          <div className="lg:hidden fixed inset-x-0 top-20 bottom-0 z-40 bg-white border-t border-gray-100 overflow-y-auto pb-8 shadow-xl animate-fade-in">
+            <div className="flex flex-col gap-2 p-4">
               {navigation.map((item) => (
                 <div key={item.name} className="space-y-1">
                   {item.hasDropdown ? (
@@ -167,7 +178,7 @@ export default function Header() {
                   ) : (
                     <Link
                       href={item.href || "#"}
-                      className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold hover:bg-blue-50 rounded-lg transition-colors"
+                      className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-semibold hover:bg-blue-50 rounded-lg transition-colors text-sm"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}
@@ -189,7 +200,7 @@ export default function Header() {
                   )}
                 </div>
               ))}
-              <div className="flex flex-col gap-2 mt-4 px-4">
+              <div className="flex flex-col gap-2 mt-4 px-4 pb-4">
                 <Link href="/apply" onClick={() => setIsOpen(false)}>
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-5 rounded-lg shadow">
                     Apply Now
