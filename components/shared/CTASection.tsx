@@ -46,23 +46,23 @@ export default function CTASection({
             {subtitle}
           </p>
         )}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto">
           {primaryCTA && (
-            <Link href={primaryCTA.href}>
+            <Link href={primaryCTA.href} className="block w-full sm:inline-block sm:w-auto">
               <Button
                 size="lg"
-                className="bg-sky-400 hover:bg-sky-500 text-blue-950 font-bold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
+                className="w-full bg-sky-400 hover:bg-sky-500 text-blue-950 font-bold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all"
               >
                 {primaryCTA.text}
               </Button>
             </Link>
           )}
           {secondaryCTA && (
-            <Link href={secondaryCTA.href}>
+            <Link href={secondaryCTA.href} className="block w-full sm:inline-block sm:w-auto">
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-blue-900 px-8 py-6 text-lg"
+                className="w-full border-white text-white hover:bg-white hover:text-blue-900 px-8 py-6 text-lg"
               >
                 {secondaryCTA.text}
               </Button>

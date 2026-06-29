@@ -71,8 +71,8 @@ export default function PlacementPartners() {
           <p className="text-gray-600 mb-4">
             Want to see where our students are working?
           </p>
-          <Link href="/placements">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8">
+          <Link href="/placements" className="block w-full sm:inline-block sm:w-auto">
+            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-8">
               View Placement Records
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

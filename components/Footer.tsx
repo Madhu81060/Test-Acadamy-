@@ -44,12 +44,12 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-md">
                 <span className="text-blue-900 font-bold text-xl">TA</span>
               </div>
               <div>
                 <span className="text-xl font-bold">Test</span>
-                <span className="text-xl font-bold text-orange-400"> Academy</span>
+                <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-sky-400"> Academy</span>
               </div>
             </div>
             <p className="text-blue-200 text-sm leading-relaxed">
@@ -57,11 +57,11 @@ export default function Footer() {
               and 100% placement assistance. Building careers since 2014.
             </p>
             <div className="space-y-3">
-              <a href="tel:+919876543210" className="flex items-center gap-3 text-blue-200 hover:text-orange-400 transition-colors">
+              <a href="tel:+919876543210" className="flex items-center gap-3 text-blue-200 hover:text-sky-300 transition-colors">
                 <Phone className="h-4 w-4" />
                 <span className="text-sm">+91 98765 43210</span>
               </a>
-              <a href="mailto:info@testacademy.com" className="flex items-center gap-3 text-blue-200 hover:text-orange-400 transition-colors">
+              <a href="mailto:info@testacademy.com" className="flex items-center gap-3 text-blue-200 hover:text-sky-300 transition-colors">
                 <Mail className="h-4 w-4" />
                 <span className="text-sm">info@testacademy.com</span>
               </a>
@@ -128,19 +128,19 @@ export default function Footer() {
             <div className="mt-8">
               <h4 className="font-semibold mb-4">Follow Us</h4>
               <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors">
+                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-sky-500 rounded-full flex items-center justify-center transition-colors flex-shrink-0">
                   <Facebook className="h-5 w-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors">
+                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-sky-500 rounded-full flex items-center justify-center transition-colors flex-shrink-0">
                   <Twitter className="h-5 w-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors">
+                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-sky-500 rounded-full flex items-center justify-center transition-colors flex-shrink-0">
                   <Linkedin className="h-5 w-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors">
+                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-sky-500 rounded-full flex items-center justify-center transition-colors flex-shrink-0">
                   <Instagram className="h-5 w-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-orange-500 rounded-full flex items-center justify-center transition-colors">
+                <a href="#" className="w-10 h-10 bg-blue-800 hover:bg-sky-500 rounded-full flex items-center justify-center transition-colors flex-shrink-0">
                   <Youtube className="h-5 w-5" />
                 </a>
               </div>

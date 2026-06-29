@@ -267,14 +267,14 @@ export default function IntermediateTraining() {
             </div>
 
             {/* Quick action button container */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/apply" className="flex-1">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
+              <Link href="/apply" className="block w-full sm:flex-1">
                 <Button className="w-full bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold py-6 rounded-xl shadow-lg shadow-orange-500/25 transition-all hover:scale-[1.02]">
                   Enroll Now
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/contact?demo=true" className="flex-1">
+              <Link href="/contact?demo=true" className="block w-full sm:flex-1">
                 <Button variant="outline" className="w-full border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-white font-semibold py-6 rounded-xl transition-all hover:scale-[1.02]">
                   Book Free Demo Class
                 </Button>

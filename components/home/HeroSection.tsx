@@ -169,7 +169,7 @@ export default function HeroSection() {
                 const cleanWord = word.replace(/[.,]/g, "");
                 const isHighlight = highlightWords.some(hw => cleanWord.toLowerCase().includes(hw.toLowerCase()));
                 return (
-                  <span key={i} className={isHighlight ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-400 to-cyan-300 pr-1 md:pr-2 inline-block" : "pr-1 md:pr-2 inline-block"}>
+                  <span key={i} className={isHighlight ? "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-400 to-cyan-300 pr-1 md:pr-2 inline" : "pr-1 md:pr-2 inline"}>
                     {word}
                   </span>
                 );
@@ -192,22 +192,22 @@ export default function HeroSection() {
             </div>
 
             {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <Link href={current.primaryCTA.href} className="w-full sm:w-auto relative group">
+            <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto">
+              <Link href={current.primaryCTA.href} className="block w-full sm:inline-block sm:w-auto relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-sky-500 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-300" />
                 <Button
                   size="lg"
-                  className="relative w-full sm:w-auto bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold py-6 px-8 text-base rounded-xl shadow-lg border border-white/10"
+                  className="relative w-full bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold py-6 px-8 text-base rounded-xl shadow-lg border border-white/10"
                 >
                   <Calendar className="mr-2 h-5 w-5" />
                   {current.primaryCTA.text}
                 </Button>
               </Link>
-              <Link href={current.secondaryCTA.href} className="w-full sm:w-auto">
+              <Link href={current.secondaryCTA.href} className="block w-full sm:inline-block sm:w-auto">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-sky-400 font-bold py-6 px-8 text-base rounded-xl transition-colors"
+                  className="w-full bg-white/5 border-white/20 text-white hover:bg-white/10 hover:text-sky-400 font-bold py-6 px-8 text-base rounded-xl transition-colors"
                 >
                   {current.secondaryCTA.text}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -375,7 +375,7 @@ export default function HeroSection() {
         </div>
 
         {/* Carousel indicators & controls */}
-        <div className="mt-16 flex items-center justify-between border-t border-white/10 pt-6">
+        <div className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-6">
           {/* Dots Indicator */}
           <div className="flex gap-2">
             {slides.map((_, idx) => (
