@@ -175,10 +175,10 @@ export default function IntermediateTraining() {
             Specialized Program
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
-            Intermediate Students <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 bg-clip-text text-transparent">Electrical Training</span>
+            ITI & Intermediate Students <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 bg-clip-text text-transparent">Electrical Training</span>
           </h2>
           <p className="mt-4 text-base md:text-lg text-slate-400">
-            A comprehensive, job-oriented program tailored specifically for 10th and 12th pass students to build strong practical foundations and transition straight into certified electrical careers.
+            A comprehensive, job-oriented program tailored specifically for ITI, 10th, and 12th pass students to build strong practical foundations and transition straight into certified electrical careers.
           </p>
         </div>
 

@@ -116,16 +116,16 @@ const courses = [
   {
     id: "intermediate-electrical-training",
     icon: Zap,
-    title: "Intermediate Students Electrical Training",
+    title: "ITI & Intermediate Students Electrical Training",
     tagline: "100% Practical Training & Job Placement",
     description:
-      "A customized practical program for 10th and 12th pass students. Master domestic/industrial wiring, motors, and control panels with comprehensive troubleshooting skills in fully-equipped labs.",
+      "A customized practical program for ITI, 10th, and 12th pass students. Master domestic/industrial wiring, motors, and control panels with comprehensive troubleshooting skills in fully-equipped labs.",
     image: "https://images.pexels.com/photos/1435184/pexels-photo-1435184.jpeg?auto=compress&cs=tinysrgb&w=800",
     color: "from-orange-500 to-amber-500",
     bg: "bg-orange-50",
     duration: "3 Months",
     modules: 18,
-    eligibility: "10th Pass / 12th Pass (Intermediate)",
+    eligibility: "ITI / 10th Pass / 12th Pass (Intermediate)",
     fee: "Rs. 20,000",
     highlights: [
       "Basic Electrical",
