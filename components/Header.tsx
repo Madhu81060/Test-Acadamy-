@@ -15,6 +15,7 @@ const courses = [
   { name: "Electrical Engineering (EEE)", href: "/courses#electrical-engineering" },
   { name: "Electronics Engineering (ECE)", href: "/courses#electronics-engineering" },
   { name: "Electrician Training", href: "/courses#electrician" },
+  { name: "ITI Electrician & Wireman (Specialized)", href: "/courses#iti-electrician-wireman" },
   { name: "ITI & Intermediate Students Electrical Training", href: "/courses#intermediate-electrical-training" },
   { name: "Electrical Technician (Advanced)", href: "/courses#electrical-technician" },
 ];
